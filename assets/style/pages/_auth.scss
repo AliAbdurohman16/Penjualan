@@ -1,0 +1,39 @@
+.page-auth {
+    .row-login {
+        min-height: 70vh;
+    }
+
+    .store-auth {
+        h2 {
+            font-weight: 200;
+            margin-top: 0;
+            font-size: 28px;
+            color: #0C0D36;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            background-color: #f3f3f3;
+        }
+
+        .btn-login {
+            @include button-variant(#F3F3F3, transparent);
+            color: #BBBBBB
+        }
+
+        @include media-breakpoint-down(md) {
+            h2 {
+                text-align: center;
+            }
+
+            .form-control,
+            .btn {
+                width: 100% !important;
+            }
+
+            .btn {
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
