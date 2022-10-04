@@ -113,7 +113,7 @@ if (isset($_POST["konfirmasi"])) {
                       </td>
                       <td style="width: 20%;">
                         <div class=""><?= $t["product_name"]; ?></div>
-                        <div class="product-title"><?= $t["unit"] / 1000; ?> Kilogram</div>
+                        <div class="product-title"><?= $t["unit"] / 4; ?> Kilogram</div>
                       </td>
                       <td style="width: 20%;">
                         <div class="">#<?= $t["code_product"]; ?></div>

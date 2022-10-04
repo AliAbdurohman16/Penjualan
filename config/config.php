@@ -336,6 +336,7 @@ function checkout($data)
     $code = "EZM-";
     $user_id = $data['user_id'];
     $total_price = $data["total_price"];
+
     if ($total_price == 0) {
         echo "<script>
                 alert('Pilih Produk Terlebih dahulu');
@@ -379,7 +380,7 @@ function checkout($data)
                         ";
     mysqli_query($conn, $queryTransaction);
     
-    $carts = query("SELECT * FROM carts INNER JOIN products ON carts.product_id = products.id_product WHERE user_id = $user_id");
+    $carts = query("SELECT * FROM carts INNER JOIN products ON carts.id_product = products.id_product WHERE id_user = $user_id");
     $codeProduct = 'PRD-';
     $dataIdTransaction = query("SELECT * FROM transactions");
     $codeProduct .= mt_rand(00000,99999);
@@ -388,7 +389,7 @@ function checkout($data)
         foreach ($dataIdTransaction as $idTransaction) {
             $transaction_id = $idTransaction["id_transaction"];
         }
-        $id_product = $cart["product_id"];
+        $id_product = $cart["id_product"];
         
         $productPrice = $cart["price"];
         $banyak = $cart["banyak"];
@@ -399,7 +400,7 @@ function checkout($data)
         mysqli_query($conn, $queryTransactionDetails);
     }
 
-    mysqli_query($conn, "DELETE FROM carts WHERE user_id = $user_id");
+    mysqli_query($conn, "DELETE FROM carts WHERE id_user = $user_id");
 
     return mysqli_affected_rows($conn);
 
@@ -516,7 +517,7 @@ function tambahCustomer($data)
 
     $query = "INSERT INTO customers
                 VALUES
-                ('', '$nama_customer', '$email', '$password', '$phone_number', '$alamat')
+                ('', '$name', '$email', '$password', '$phone_number', '$alamat')
             ";
 
     mysqli_query($conn, $query);

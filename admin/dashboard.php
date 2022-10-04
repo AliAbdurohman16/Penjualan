@@ -253,10 +253,10 @@
 ?>
 
 <!-- Ini Buat Grafik -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-<script>
+<script type="text/javascript">
   const labelsProduk = [<?= $labelsProduk?>];
 
   const dataProduk  = {
