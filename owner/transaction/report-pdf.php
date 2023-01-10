@@ -28,6 +28,7 @@ $html = '<!DOCTYPE html>
 $html .= '<div>
             <h1 style="text-align: center;">LAPORAN PDF TRANSAKSI</h1>
             <h2 style="text-align: center; color: red;">KARYA INDAH</h2>
+            <h3 style="text-align: center;">Tanggal '.date("d-m-Y", strtotime($tanggalAwal)).' - '.date("d-m-Y", strtotime($tanggalAkhir)).'</h3>
         </div>    
         <table width="100%">
             <thead>

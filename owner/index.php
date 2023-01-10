@@ -151,6 +151,42 @@ if (!isset($_SESSION["login"]) && !isset($_SESSION["user"])) {
       </form>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="cetakGrafikPDF" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form action="report/view-grafik.php" method="GET">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Cetak Laporan Grafik PDF</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row" id="tanggal">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="tanggalAwal">Dari Tanggal :</label>
+                    <input type="date" name="tanggalAwal" id="tanggalAwal" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="tanggalAkhir">Sampai Tanggal :</label>
+                    <input type="date" name="tanggalAkhir" id="tanggalAkhir" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" name="filter" class="btn btn-primary">Cetak PDF</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
     
     
 

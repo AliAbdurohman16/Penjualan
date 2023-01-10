@@ -338,10 +338,34 @@ const labelsCust = [<?= $labelsCostumer?>];
     }]
   };
 
+  const successTracker = {
+    id: 'successTracker',
+    beforeDraw(chart, args, options) {
+      const { ctx, chartArea: { top, right, bottom, left, width, height }, scales: { x, y } } = chart; 
+      ctx.save();
+      
+      // success line
+      ctx.strokeStyle = 'green';
+      ctx.strokeRect(left, y.getPixelForValue(9), width, 0);
+      ctx.restore();
+
+      // success background
+      ctx.fillStyle = 'rgba(0, 200, 0, 0.2)';
+      ctx.fillRect(left, top, width, y.getPixelForValue(9) - top);
+    }
+  }
+
   const configCust = {
     type: 'bar',
     data: dataCust,
-    options: {}
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+    plugins: [successTracker],
   };
 
   const myChartCust = new Chart(

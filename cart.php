@@ -253,10 +253,15 @@ if (isset($_POST["deleteCart"])) {
               <div class="form-group">
                 <label for="city">Kota</label>
                 <select name="city" id="city" class="form-control" required>
-                  <option value="JAKARTA">JAKARTA</option>
-                  <option value="BOGOR">BOGOR</option>
-                  <option value="TANGERANG">TANGERANG</option>
-                  <option value="DEPOK">DEPOK</option>
+                  <option value="JAKARTA PUSAT">JAKARTA PUSAT</option>
+                  <option value="JAKARTA SELATAN">JAKARTA SELATAN</option>
+                  <option value="JAKARTA TIMUR">JAKARTA TIMUR</option>
+                  <option value="JAKARTA BARAT">JAKARTA BARAT</option>
+                  <option value="JAKARTA UTARA">JAKARTA UTARA</option>
+                  <option value="KOTA CIREBON">KOTA CIREBON</option>
+                  <option value="KABUPATEN CIREBON">KABUPATEN CIREBON</option>
+                  <option value="KABUPATEN KUNINGAN">KABUPATEN KUNINGAN</option>
+                  <option value="KOTA DEPOK">KOTA DEPOK</option>
                 </select>
               </div>
             </div>

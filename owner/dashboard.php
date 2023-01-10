@@ -1,42 +1,20 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light navbar-store fixed-top"
-  data-aos="fade-down"
->
+<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
   <div class="container-fluid">
-    <button
-      class="btn btn-secondary d-md-none mr-auto mr-2"
-      id="menu-toggle"
-    >
+    <button class="btn btn-secondary d-md-none mr-auto mr-2" id="menu-toggle">
       &laquo; Menu
     </button>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarResponsive"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collpase navbar-collapse" id="navbarResponsive">
       <!-- dekstop menu -->
       <ul class="navbar-nav d-none d-lg-flex ml-auto">
         <li class="nav-item dropdown">
-          <a
-            href="#"
-            class="nav-link"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-          >
-            <img
-              src="../assets/images/person-circle.svg"
-              alt="profile"
-              height="40px"
-              class="rounded-circle mr-2 profile-picture"
-            />
-            <?php 
-              $id_user = $_SESSION['user'];
-              $user = query("SELECT * FROM users WHERE id_user = $id_user")[0];
+          <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
+            <img src="../assets/images/person-circle.svg" alt="profile" height="40px" class="rounded-circle mr-2 profile-picture" />
+            <?php
+            $id_user = $_SESSION['user'];
+            $user = query("SELECT * FROM users WHERE id_user = $id_user")[0];
             ?>
             Hi, <?= $user["name"]; ?>
           </a>
@@ -57,10 +35,7 @@
     </div>
   </div>
 </nav>
-<div
-  class="section-content section-dashboard-home"
-  data-aos="fade-up"
->
+<div class="section-content section-dashboard-home" data-aos="fade-up">
   <div class="container-fluid">
     <div class="dashboard-heading">
       <h2 class="dashboard-title">Dashboard</h2>
@@ -71,9 +46,9 @@
         <div class="col-md-4">
           <div class="card mb-2">
             <div class="card-body">
-            <?php 
+              <?php
               $Users = rows("SELECT * FROM users");
-            ?>
+              ?>
               <div class="dashboard-card-title">Users</div>
               <div class="dashboard-card-subtitle"><?= $Users; ?></div>
             </div>
@@ -82,16 +57,16 @@
         <div class="col-md-4">
           <div class="card mb-2">
             <div class="card-body">
-            <?php 
+              <?php
               $transactions = query("SELECT * FROM transactions");
               $total_price = 0;
-              foreach ($transactions as $t ) {
+              foreach ($transactions as $t) {
                 $total_price += $t["total_price"];
               }
-              
+
               $total_price_product = 0;
               $products = query("SELECT * FROM products");
-              foreach ($products as $p ) {
+              foreach ($products as $p) {
                 $total_price_product += $p["price"];
               }
 
@@ -99,7 +74,7 @@
               if ($revenue < 0) {
                 $revenue = 0;
               }
-            ?>
+              ?>
               <div class="dashboard-card-title">Revenue</div>
               <div class="dashboard-card-subtitle">Rp. <?= number_format($revenue); ?></div>
             </div>
@@ -108,9 +83,9 @@
         <div class="col-md-4">
           <div class="card mb-2">
             <div class="card-body">
-            <?php 
+              <?php
               $transactionCount = rows("SELECT * FROM transactions");
-            ?>
+              ?>
               <div class="dashboard-card-title">Transaction</div>
               <div class="dashboard-card-subtitle"><?= $transactionCount; ?></div>
             </div>
@@ -188,13 +163,23 @@
           </a>
         </div>
       </div> -->
+      <div class="row mt-3 mb-3">
+        <div class="col-12">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cetakGrafikPDF">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill mr-1" viewBox="0 0 16 16">
+              <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+              <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+            </svg> Cetak Grafik PDF
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <div class="container">
   <div class="ecommerce-widget">
     <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="card">
           <div class="card-header">
             <h5 class="mb-0">Customer Potensial</h5>
@@ -210,13 +195,13 @@
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="card">
           <div class="card-header">
-            <h5 class="mb-0">Asal Pembeli</h5>
+            <h5 class="mb-0">Asal Customer</h5>
           </div>
           <div class="card-body">
             <canvas id="chartKota"></canvas>
           </div>
           <div class="card-footer">
-            <a href="?page=users" class="btn btn-success float-right">View Details</a>
+            <a href="?page=transactions" class="btn btn-success float-right">View Details</a>
           </div>
         </div>
       </div>
@@ -242,7 +227,57 @@
             <canvas id="chartProduk"></canvas>
           </div>
           <div class="card-footer">
-            <a href="?page=products" class="btn btn-success float-right">View Details</a>
+            <a href="?page=transactions" class="btn btn-success float-right">View Details</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Berdasarkan Customer</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Pilihan Kebijakan</th>
+                    <th scope="col">Keterangan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $no = 1;
+                  $dataTertinggiCutomer = query("SELECT SUM(transactions_details.banyak) as 'jumlah', users.name as 'name' FROM transactions_details INNER JOIN users ON transactions_details.user_id = users.id_user GROUP BY name ORDER BY jumlah DESC");
+                  ?>
+
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Harga Spesial</td>
+                    <td>
+                      <?php foreach ($dataTertinggiCutomer as $customer) : ?>
+                        <?php if ($customer['jumlah'] >= 9) : ?>
+                        <?= ucwords($customer['name']); ?>,
+                        <?php endif; ?>
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Gift</td>
+                    <td>
+                      <?php foreach ($dataTertinggiCutomer as $customer) : ?>
+                        <?php if ($customer['jumlah'] >= 9) : ?>
+                        <?= ucwords($customer['name']); ?>,
+                        <?php endif; ?>
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -253,31 +288,33 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">NO</th>
-                          <th scope="col">Jenis Promo</th>
-                          <th scope="col">Keterangan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                          $no = 1;
-                          $dataTertinggiDaerah = query("SELECT COUNT(id_transaction) as 'jumlah', city as 'city' FROM transactions GROUP BY city ORDER BY jumlah DESC LIMIT 1");
-                        ?>
-                        
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td>Buka Cabang</td>
-                            <?php foreach ($dataTertinggiDaerah as $daerah) : ?>
-                            <td><?= $daerah['city']; ?></td>
-                            <?php endforeach;?>
-                          </tr>
-                        
-                      </tbody>
-                    </table>
-                  </div>
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Pilihan Kebijakan</th>
+                    <th scope="col">Keterangan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $no = 1;
+                  $dataTertinggiDaerah = query("SELECT COUNT(id_transaction) as 'jumlah', city as 'city' FROM transactions GROUP BY city ORDER BY jumlah DESC LIMIT 1");
+                  ?>
+
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Buka Cabang</td>
+                    <td>
+                      <?php foreach ($dataTertinggiDaerah as $daerah) : ?>
+                        <?= $daerah['city']; ?>
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -288,26 +325,33 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">NO</th>
-                          <th scope="col">Jenis Promo</th>
-                          <th scope="col">Keterangan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                          $no = 1;
-                        ?>
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td>Black Free Day</td>
-                            <td>Promosi hari jum'at</td>
-                          </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Pilihan Kebijakan</th>
+                    <th scope="col">Keterangan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $no = 1;
+                  ?>
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Promo peringatan di hari tertentu</td>
+                    <td>Promo di moment-moment hari besar dan akhir atau awal tahun</td>
+                  </tr>
+                  <?php
+                  $no = 2;
+                  ?>
+                  <th scope="row"><?= $no++; ?></th>
+                    <td>Diskon awal bulan</td>
+                    <td>Diskon setiap awal bulan (tanggal 3 s/d tanggal 7)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -318,94 +362,99 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">NO</th>
-                          <th scope="col">Jenis Promo</th>
-                          <th scope="col">Keterangan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                          $no = 1;
-                          $dataTertinggi = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah DESC LIMIT 1");
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">Pilihan Kebijakan</th>
+                    <th scope="col">Keterangan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $no = 1;
+                  $dataTertinggi = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah DESC LIMIT 1");
 
-                          $dataTerendah = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah ASC LIMIT 1");
+                  $dataTerendah = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah ASC LIMIT 1");
 
-                          $dataDiscount = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah ASC LIMIT 5");
-                        ?>
-                        
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td>Bundling</td>
-                            <?php foreach ($dataTertinggi as $tinggi) : ?>
-                              <?php foreach ($dataTerendah as $rendah) : ?>
-                            <td><?= $tinggi['name'] . ' dan ' . $rendah['name']; ?></td>
-                              <?php endforeach;?>
-                            <?php endforeach;?>
-                          </tr>
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td>Beli 2 gratis 1</td>
-                            <?php foreach ($dataTerendah as $rendah) : ?>
-                            <td><?= $rendah['name']; ?></td>
-                            <?php endforeach;?>
-                          </tr>
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td>Diskon</td>
-                            <td>
-                            <?php foreach ($dataDiscount as $discount) : ?>
-                            <?= $discount['name']; ?>,
-                            <?php endforeach;?>
-                            </td>
-                          </tr>
-                        
-                      </tbody>
-                    </table>
-                  </div>
+                  $dataDiscount = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id ORDER BY jumlah ASC LIMIT 5");
+                  ?>
+
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Bundling</td>
+                    <td>
+                      <?php foreach ($dataTertinggi as $tinggi) : ?>
+                        <?php foreach ($dataTerendah as $rendah) : ?>
+                          <?= ucwords($tinggi['name']) . ' dan ' . ucwords($rendah['name']); ?>
+                        <?php endforeach; ?>
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Beli 2 gratis 1</td>
+                    <td>
+                      <?php foreach ($dataTerendah as $rendah) : ?>
+                        <?= ucwords($rendah['name']); ?>
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><?= $no++; ?></th>
+                    <td>Diskon</td>
+                    <td>
+                      <?php foreach ($dataDiscount as $discount) : ?>
+                        <?= ucwords($discount['name']); ?>,
+                      <?php endforeach; ?>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
- 
+
 <?php
-  $recordCustomer = query("SELECT SUM(transactions_details.banyak) as 'jumlah', users.name as 'name' FROM transactions_details INNER JOIN users ON transactions_details.user_id = users.id_user GROUP BY name");
-  foreach ($recordCustomer as $val) {
-    @$labelsCostumer .= "'".$val['name']."',";
-    @$jumlahCostumer .= "'".$val['jumlah']."',";
-  }
+$recordCustomer = query("SELECT SUM(transactions_details.banyak) as 'jumlah', users.name as 'name' FROM transactions_details INNER JOIN users ON transactions_details.user_id = users.id_user GROUP BY name");
+foreach ($recordCustomer as $val) {
+  @$labelsCostumer .= "'" . strtoupper($val['name']) . "',";
+  @$jumlahCostumer .= "'" . strtoupper($val['jumlah']) . "',";
+  // $scale = $val['jumlah'] % 0.5;
+}
+// echo $scale;
 
-  $recordDaerah = query("SELECT COUNT(id_transaction) as 'jumlah', city as 'city' FROM transactions GROUP BY city");
-  foreach ($recordDaerah as $val) {
-    @$labelsDaerah .= "'".$val['city']."',";
-    @$jumlahDaerah .= "'".$val['jumlah']."',";
-  }
+$recordDaerah = query("SELECT COUNT(id_transaction) as 'jumlah', city as 'city' FROM transactions GROUP BY city");
+foreach ($recordDaerah as $val) {
+  @$labelsDaerah .= "'" . strtoupper($val['city']) . "',";
+  @$jumlahDaerah .= "'" . strtoupper($val['jumlah']) . "',";
+}
 
-  $recordWaktu = query("SELECT COUNT(id_transaction) as jumlah, DAY(time_arrived) as tanggal FROM transactions WHERE (date(time_arrived) between date_add(curdate(),interval -DAY(curdate())+1 DAY) AND LAST_DAY(CURDATE())) GROUP BY DAY(time_arrived)");
-  foreach ($recordWaktu as $val) {
-    @$labelsWaktu .= "'".$val['tanggal']."',";
-    @$jumlahWaktu .= "'".$val['jumlah']."',";
-  }
+$recordWaktu = query("SELECT COUNT(id_transaction) as jumlah, DAY(time_arrived) as tanggal FROM transactions WHERE (date(time_arrived) between date_add(curdate(),interval -DAY(curdate())+1 DAY) AND LAST_DAY(CURDATE())) GROUP BY DAY(time_arrived)");
+foreach ($recordWaktu as $val) {
+  @$labelsWaktu .= "'" . strtoupper($val['tanggal']) . "',";
+  @$jumlahWaktu .= "'" . strtoupper($val['jumlah']) . "',";
+}
 
-  $recordProduct = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id");
-  foreach ($recordProduct as $val) {
-    @$labelsProduk .= "'".$val['name']."',";
-    @$jumlahProduk .= "'".$val['jumlah']."',";
-  }
+$recordProduct = query("SELECT SUM(transactions_details.banyak) as 'jumlah', products.product_name as 'name' FROM transactions_details INNER JOIN products ON transactions_details.product_id = products.id_product GROUP BY product_id");
+foreach ($recordProduct as $val) {
+  @$labelsProduk .= "'" . strtoupper($val['name']) . "',";
+  @$jumlahProduk .= "'" . strtoupper($val['jumlah']) . "',";
+}
 ?>
 
 <!-- Ini Buat Grafik -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
 <script>
-  const labelsProduk = [<?= $labelsProduk?>];
+  const labelsProduk = [<?= $labelsProduk ?>];
 
-  const dataProduk  = {
+  const dataProduk = {
     labels: labelsProduk,
     datasets: [{
       label: 'Produk Potensial',
@@ -418,7 +467,6 @@
   const configProduk = {
     type: 'bar',
     data: dataProduk,
-    options: {}
   };
 
   const myChartProduk = new Chart(
@@ -440,8 +488,7 @@
 
   const configKota = {
     type: 'bar',
-    data : dataKota,
-    options: {}
+    data: dataKota,
   };
 
   const myChartKota = new Chart(
@@ -449,22 +496,21 @@
     configKota
   );
 
-const labelsBulan = [<?= $labelsWaktu?>];
+  const labelsBulan = [<?= $labelsWaktu ?>];
 
-  const dataBulan  = {
+  const dataBulan = {
     labels: labelsBulan,
     datasets: [{
       label: 'Waktu Potensial',
       backgroundColor: '#28a745',
       borderColor: '#28a745',
-      data: [<?= $jumlahWaktu?>],
+      data: [<?= $jumlahWaktu ?>],
     }]
   };
 
   const configBulan = {
     type: 'bar',
     data: dataBulan,
-    options: {}
   };
 
   const myChartBulan = new Chart(
@@ -472,22 +518,46 @@ const labelsBulan = [<?= $labelsWaktu?>];
     configBulan
   );
 
-const labelsCust = [<?= $labelsCostumer?>];
+  const labelsCust = [<?= $labelsCostumer ?>];
 
-  const dataCust  = {
+  const dataCust = {
     labels: labelsCust,
     datasets: [{
       label: 'Customer Potensial',
       backgroundColor: '#28a745',
       borderColor: '#28a745',
-      data: [<?= $jumlahCostumer?>],
-    }]
+      data: [<?= $jumlahCostumer ?>],
+    }],
   };
+
+  const successTracker = {
+    id: 'successTracker',
+    beforeDraw(chart, args, options) {
+      const { ctx, chartArea: { top, right, bottom, left, width, height }, scales: { x, y } } = chart; 
+      ctx.save();
+      
+      // success line
+      ctx.strokeStyle = 'green';
+      ctx.strokeRect(left, y.getPixelForValue(9), width, 0);
+      ctx.restore();
+
+      // success background
+      ctx.fillStyle = 'rgba(0, 200, 0, 0.2)';
+      ctx.fillRect(left, top, width, y.getPixelForValue(9) - top);
+    }
+  }
 
   const configCust = {
     type: 'bar',
     data: dataCust,
-    options: {}
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+    plugins: [successTracker],
   };
 
   const myChartCust = new Chart(
